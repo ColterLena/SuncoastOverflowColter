@@ -1,24 +1,32 @@
-import React, { Component } from 'react'
-import { Route, Switch } from 'react-router'
-import { Layout } from './components/Layout'
-import { Home } from './pages/Home'
-import HelloWorld from './pages/_template/HelloWorld'
-import HeyWorld from './pages/_template/HeyWorld'
-import NotFound from './pages/NotFound'
-import './custom.scss'
-export default class App extends Component {
-  static displayName = App.name
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
 
-  render() {
-    return (
-      <Layout>
+import './custom.scss'
+
+import { Questions } from './pages/Questions'
+import { Header } from './components/Header'
+import { AddQuestion } from './pages/AddQuestion'
+import { ShowQuestion } from './pages/ShowQuestion'
+import { NavBar } from './components/NavBar'
+
+export function App() {
+  return (
+    <>
+      <NavBar />
+      <main className="container-fluid p-4">
+        <Header />
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/counter" component={HelloWorld} />
-          <Route exact path="/typescript" component={HeyWorld} />
-          <Route exact path="*" component={NotFound} />
+          <Route exact path="/">
+            <Questions />
+          </Route>
+          <Route path="/question/add">
+            <AddQuestion />
+          </Route>
+          <Route path="/question/:id">
+            <ShowQuestion />
+          </Route>
         </Switch>
-      </Layout>
-    )
-  }
+      </main>
+    </>
+  )
 }
